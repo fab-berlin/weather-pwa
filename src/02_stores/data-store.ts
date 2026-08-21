@@ -10,6 +10,9 @@ interface DataStore {
 const useDataStore = create<DataStore>((setState, getState) => ({
     data: null,
     fetchData: async () => {
-        const data = await fetch();
+        const infoUrl = process.env.INFO_API_BASE ?? '';
+        const response = await fetch(`${infoUrl}/weatherJson.php`, {cache: 'no-store'});
+        const result = await response.json();
+        setState({ data: result });
     }
 }));
