@@ -25,17 +25,33 @@ export default function Home() {
         return () => controller.abort();
     }, []);
 
+    const fileTime = weatherData?.filetime
+        ? new Date(weatherData.filetime).toLocaleString()
+        : null;
+
+
+    const retrieveData = async () => {
+        const response = await fetch('/api', {method: 'GET'});
+        const data = await response.json();
+        setWeatherData(data);
+    }
+
     const outsideData = weatherData?.filedata.find(item => item.name === "aussen");
 
     return (
-        <ul>
-            {weatherData?.owm && outsideData &&
-                <OutdoorView owmData={weatherData?.owm}
-                             outsideData={outsideData}/>
-            }
-            {weatherData?.filedata.filter(item => item.name !== "aussen").map((item: RoomData, index: number) =>
-                <RoomView roomData={item} key={index}/>
-            )}
-        </ul>
+        <>
+            <span className="text-xxs text-center block mb-2">{fileTime}</span>
+            <ul className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+                {weatherData?.owm && outsideData &&
+                    <OutdoorView owmData={weatherData?.owm}
+                                 outsideData={outsideData}
+                                 onClick={retrieveData}
+                    />
+                }
+                {weatherData?.filedata.filter(item => item.name !== "aussen").map((item: RoomData, index: number) =>
+                    <RoomView roomData={item} key={index}/>
+                )}
+            </ul>
+        </>
     );
 }

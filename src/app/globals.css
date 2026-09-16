@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@theme {
+    --text-3xl: 28px;
+    --text-xxs: 10px;
+}
+
+:root {
+    --text-color: #ffffff;
+}
+:root .dark {
+    --text-color: #000000;
+}
+
+body {
+    color: var(--text-color);
+}
