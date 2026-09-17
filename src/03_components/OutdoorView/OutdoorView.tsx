@@ -6,8 +6,8 @@ const OutdoorView = ({owmData, outsideData, onClick}: {
     outsideData: RoomData,
     onClick: () => void
 }) => {
-    return <li className="rounded-xl p-4 col-span-full bg-white/10 border relative">
-        <button onClick={onClick} className={'text-left block w-full'}>
+    return <li className="col-span-full border relative rounded-xl">
+        <button onClick={onClick} className={'rounded-xl text-left block w-full bg-white/10 p-4 pointer-coarse:active:bg-white/50'}>
             <div data-id="top-container" className={'flex flex-row justify-between mb-4'}>
                 <p className="flex flex-col"><span className="text-sm">{owmData.weather[0].description}</span><span
                     className="text-3xl">{outsideData.temperature} °C</span></p>
